@@ -10,7 +10,7 @@ public class TrumpController : MonoBehaviour {
     public Transform projectileTransform;
     private float lastShotTime;
     public Transform player;
-    private int health = 10;
+    private int health = 50;
 
     // Use this for initialization
     void Start () {
@@ -57,7 +57,10 @@ public class TrumpController : MonoBehaviour {
             health -= 1;
             if (health <= 0)
             {
-                Instantiate(explosion, transform.position, transform.rotation);
+                for (int n = 0; n < 10; n++)
+                {
+                    Instantiate(explosion, new Vector3(transform.position.x + Random.Range(-10.0f,10.0f), transform.position.y + Random.Range(-10.0f, 10.0f), 0), transform.rotation);
+                }
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
             }
