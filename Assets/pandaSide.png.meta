@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 5eb1578d26a99534f884af9cb751a5b9
-timeCreated: 1491063887
+guid: 010a6171c81f23544be70f257b320010
+timeCreated: 1491063922
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: pandaBack_0
-    21300002: pandaBack_1
-    21300004: pandaBack_2
-    21300006: pandaBack_3
-    21300008: pandaBack_4
-    21300010: pandaBack_5
-    21300012: pandaBack_6
+    21300000: pandaSide_0
+    21300002: pandaSide_1
+    21300004: pandaSide_2
+    21300006: pandaSide_3
+    21300008: pandaSide_4
+    21300010: pandaSide_5
+    21300012: pandaSide_6
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -77,7 +77,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pandaBack_0
+      name: pandaSide_0
       rect:
         serializedVersion: 2
         x: 83
@@ -90,7 +90,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_1
+      name: pandaSide_1
       rect:
         serializedVersion: 2
         x: 566
@@ -103,7 +103,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_2
+      name: pandaSide_2
       rect:
         serializedVersion: 2
         x: 61
@@ -116,20 +116,20 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_3
+      name: pandaSide_3
       rect:
         serializedVersion: 2
         x: 588
         y: 1066
         width: 217
-        height: 234
+        height: 237
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_4
+      name: pandaSide_4
       rect:
         serializedVersion: 2
         x: 94
@@ -142,7 +142,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_5
+      name: pandaSide_5
       rect:
         serializedVersion: 2
         x: 594
@@ -155,7 +155,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pandaBack_6
+      name: pandaSide_6
       rect:
         serializedVersion: 2
         x: 94
