@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     public Rigidbody2D projectile;
     private float lastShotTime;
+    private int health = 3;
+    private float lastHit;
+    public Transform explosion;
 
     void Start()
 	{
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastShotTime = Time.time;
+        lastHit = Time.time;
 	}
 
     void Update()
@@ -79,8 +83,28 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
 	{		
 		if (other.gameObject.CompareTag ("Enemy")) 
-		{            
-			// remove heart & flash player & make invincible for 2 seconds
+		{
+            int invincibleTime = 3;
+            if (Time.time > (lastHit+ invincibleTime))
+            {
+                health -= 1;
+                if (health <= 0)
+                {
+                    this.spriteRenderer.enabled = false;
+                    this.animator.enabled = false;
+                    Instantiate(explosion, transform.position, transform.rotation);                    
+                    Object[] allObjects = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
+                    foreach(Object item in allObjects){
+                        Destroy(item);
+                    }
+                    
+                }
+                else
+                {                    
+                    // flash the player                    
+                }
+                lastHit = Time.time;
+            }            			
 		}
 	}
 }

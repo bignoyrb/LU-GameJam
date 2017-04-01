@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour {
     public Transform player;
     private Rigidbody2D rb2d;
     public float movementSpeed;
+    public Transform explosion;    
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,7 @@ public class EnemyController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag ("PlayerBullet")) 
         {
+            Instantiate(explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
