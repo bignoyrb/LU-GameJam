@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+    public Transform textbox;
+    private TextStuff textScript;
 	public float speed;    
 	private Rigidbody2D rb2d;
     Animator animator;
@@ -14,10 +16,7 @@ public class PlayerController : MonoBehaviour {
     private float lastHit;
     public Transform explosion;
     private Rigidbody rb;
-   
-
-
-
+  
     void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -25,7 +24,10 @@ public class PlayerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastShotTime = Time.time;
         lastHit = Time.time;
-              
+        textScript = textbox.GetComponent<TextStuff>();
+        textScript.SetHealthText(health);
+
+
     }
 
     void Update()
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour {
             if (Time.time > (lastHit+ invincibleTime))
             {
                 health -= 1;
-              
+                textScript.SetHealthText(health);
                 if (health <= 0)
                 {
                     this.spriteRenderer.enabled = false;

@@ -9,6 +9,7 @@ public class SpawnerScript : MonoBehaviour {
     public Transform explosion;
     private float lastSpawnTime;
     public Transform theDonald;
+    public Transform textbox;
 
     // Use this for initialization
     void Start()
@@ -27,6 +28,7 @@ public class SpawnerScript : MonoBehaviour {
             enemyScript.player = player;
             enemyScript.explosion = explosion;
             enemyScript.theDonald = theDonald;
+            enemyScript.textbox = textbox;
             lastSpawnTime = Time.time;
         }
 
