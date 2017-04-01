@@ -78,9 +78,9 @@ public class PlayerController : MonoBehaviour {
 		
 	void OnTriggerEnter2D(Collider2D other)
 	{		
-		//if (other.gameObject.CompareTag ("PickUp")) 
-		//{
-		//	other.gameObject.SetActive (false);
-		//}
+		if (other.gameObject.CompareTag ("Enemy")) 
+		{            
+			// remove heart & flash player & make invincible for 2 seconds
+		}
 	}
 }
