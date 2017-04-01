@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private int health = 3;
     private float lastHit;
     public Transform explosion;
+    public int killcount = 0;
 
     void Start()
 	{
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour {
                 Fire(shootingDirection);
                 lastShotTime = Time.time;
             }
-        }
+        }        
     }
     void Fire(Vector2 shootingDirection)
     {
@@ -81,30 +82,56 @@ public class PlayerController : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter2D(Collider2D other)
-	{		
-		if (other.gameObject.CompareTag ("Enemy")) 
-		{
+	{
+        if (other.gameObject.CompareTag("Enemy"))
+        {
             int invincibleTime = 3;
-            if (Time.time > (lastHit+ invincibleTime))
+            if (Time.time > (lastHit + invincibleTime))
             {
                 health -= 1;
                 if (health <= 0)
                 {
                     this.spriteRenderer.enabled = false;
                     this.animator.enabled = false;
-                    Instantiate(explosion, transform.position, transform.rotation);                    
+                    Instantiate(explosion, transform.position, transform.rotation);
                     Object[] allObjects = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
-                    foreach(Object item in allObjects){
+                    foreach (Object item in allObjects)
+                    {
                         Destroy(item);
                     }
-                    
+
                 }
                 else
-                {                    
+                {
                     // flash the player                    
                 }
                 lastHit = Time.time;
-            }            			
-		}
+            }
+        }
+        else if (other.gameObject.CompareTag("TrumpBullet"))
+        {
+            int invincibleTime = 3;
+            if (Time.time > (lastHit + invincibleTime))
+            {
+                health -= 1;
+                if (health <= 0)
+                {
+                    this.spriteRenderer.enabled = false;
+                    this.animator.enabled = false;
+                    Instantiate(explosion, transform.position, transform.rotation);
+                    Object[] allObjects = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
+                    foreach (Object item in allObjects)
+                    {
+                        Destroy(item);
+                    }
+
+                }
+                else
+                {
+                    // flash the player                    
+                }
+                lastHit = Time.time;
+            }
+        }
 	}
 }
