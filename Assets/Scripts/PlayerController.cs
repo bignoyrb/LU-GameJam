@@ -17,10 +17,13 @@ public class PlayerController : MonoBehaviour {
         float bulletSpeed = 10;
         float shootHorizontal = Input.GetAxis("Fire1");
         float shootVertical = Input.GetAxis("Fire2");
-        if (shootHorizontal>0.1 || shootVertical>0.1)
-        {
+        if (Mathf.Abs(shootHorizontal)>0.1 || Mathf.Abs(shootVertical)>0.1)
+        {            
             Rigidbody2D instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation);
-            instantiatedProjectile.velocity = new Vector2(shootHorizontal*speed, shootVertical*speed);
+            // get normalized shooting direction
+            Vector2 shootingDirection = new Vector2(shootHorizontal, shootVertical);
+            shootingDirection.Normalize();
+            instantiatedProjectile.velocity = shootingDirection*bulletSpeed;
         }
     }
 
