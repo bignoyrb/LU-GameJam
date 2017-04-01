@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerController : MonoBehaviour {
 
 	public float speed;    
@@ -12,6 +13,10 @@ public class PlayerController : MonoBehaviour {
     private int health = 3;
     private float lastHit;
     public Transform explosion;
+    private Rigidbody rb;
+   
+
+
 
     void Start()
 	{
@@ -20,7 +25,8 @@ public class PlayerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastShotTime = Time.time;
         lastHit = Time.time;
-	}
+              
+    }
 
     void Update()
     {
@@ -39,6 +45,8 @@ public class PlayerController : MonoBehaviour {
                 lastShotTime = Time.time;
             }
         }
+
+      
     }
     void Fire(Vector2 shootingDirection)
     {
@@ -88,6 +96,7 @@ public class PlayerController : MonoBehaviour {
             if (Time.time > (lastHit+ invincibleTime))
             {
                 health -= 1;
+              
                 if (health <= 0)
                 {
                     this.spriteRenderer.enabled = false;
@@ -107,4 +116,6 @@ public class PlayerController : MonoBehaviour {
             }            			
 		}
 	}
+
+    
 }
