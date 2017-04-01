@@ -8,6 +8,7 @@ public class SpawnerScript : MonoBehaviour {
     public Transform player;
     public Transform explosion;
     private float lastSpawnTime;
+    public Transform theDonald;
 
     // Use this for initialization
     void Start()
@@ -24,7 +25,8 @@ public class SpawnerScript : MonoBehaviour {
             Transform instantiatedEnemy = Instantiate(enemy, transform.position, transform.rotation);
             EnemyController enemyScript = instantiatedEnemy.GetComponent<EnemyController>();
             enemyScript.player = player;
-            enemyScript.explosion =explosion;
+            enemyScript.explosion = explosion;
+            enemyScript.theDonald = theDonald;
             lastSpawnTime = Time.time;
         }
 

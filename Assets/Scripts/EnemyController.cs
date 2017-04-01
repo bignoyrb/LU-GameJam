@@ -7,10 +7,15 @@ public class EnemyController : MonoBehaviour {
     private Rigidbody2D rb2d;
     public float movementSpeed;
     public Transform explosion;    
+    private SpriteRenderer spriteRenderer;
+    private static int killCount = 0;
+    private static bool donaldSpawned = false;
+    public Transform theDonald;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -21,8 +26,12 @@ public class EnemyController : MonoBehaviour {
     void FixedUpdate()
     {
         Vector3 myPosition = rb2d.transform.position;
-        Vector3 playerPosition = player.position;
+        Vector3 playerPosition = player.position;        
         Vector2 movement = new Vector2(playerPosition.x - myPosition.x, playerPosition.y - myPosition.y);
+        if (movement.x>0)
+            this.spriteRenderer.flipX = true;
+        else
+            spriteRenderer.flipX = false;
         rb2d.velocity = movement * movementSpeed;
     }
 
@@ -30,6 +39,14 @@ public class EnemyController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag ("PlayerBullet")) 
         {
+            killCount++;
+            if (killCount >= 2 && !donaldSpawned)
+            {
+                Transform instantiatedDonald = Instantiate(theDonald, new Vector3(0, (float)7.68, 0), transform.rotation);
+                TrumpController trumpScript = instantiatedDonald.GetComponent<TrumpController>();
+                trumpScript.player = player;
+                donaldSpawned = true;
+            }
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(this.gameObject);
