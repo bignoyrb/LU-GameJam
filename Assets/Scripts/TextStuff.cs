@@ -7,7 +7,7 @@ public class TextStuff : MonoBehaviour {
 
     public Text healthText;
     public Text countKillsText;
-    public Text messText;
+    
 
     private Rigidbody rb;
     private int countKills = 0;
@@ -27,7 +27,7 @@ public class TextStuff : MonoBehaviour {
         countKillsText.text = "Kills: " + countKills.ToString();
         if (countKills >= 10)
         {
-            messText.text = "NEXT ";
+            
         }
     }
 
@@ -36,7 +36,7 @@ public class TextStuff : MonoBehaviour {
         healthText.text = "Health: " + health.ToString();
         if (health <= 0)
         {
-            messText.text = "YOU LOSE, LOSER ";
+           
         }
     }
 }
