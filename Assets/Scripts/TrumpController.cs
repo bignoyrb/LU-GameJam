@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TrumpController : MonoBehaviour {
     private int direction = -1;
-    private int speed = 5;
+    private int movemenSpeed = 5;
     private Rigidbody2D rb2d;
-    public Transform explosion;
-    public Transform projectileTransform;
-    private float lastShotTime;
-    public Transform player;
     private int health = 50;
+    private float lastShotTime;
+    // explosion animation
+    public Transform explosion;
+    // bullet prefab
+    public Transform projectileTransform;    
+    public Transform player;    
 
     // Use this for initialization
     void Start () {
@@ -22,7 +24,7 @@ public class TrumpController : MonoBehaviour {
     {
         double firingTime = 1.0;
         Vector2 movement = new Vector2(1, 0);        
-        rb2d.velocity = movement * speed * direction;
+        rb2d.velocity = movement * movemenSpeed * direction;
 
         if (Time.time > (firingTime + lastShotTime))
         {

@@ -3,20 +3,28 @@ using System.Collections;
 
 
 public class PlayerController : MonoBehaviour {
-
-    public Transform textbox;
+    // get the textbox's script to call functions
     private TextStuff textScript;
-	public float speed;    
+    // player rigidbody	
 	private Rigidbody2D rb2d;
-    Animator animator;
-    SpriteRenderer spriteRenderer;
-    public Rigidbody2D projectile;
+    // player animator
+    private Animator animator;
+    // player spriterenderer
+    private SpriteRenderer spriteRenderer;
+    // used to store when player last shot
     private float lastShotTime;
+    // player health
     private int health = 3;
+    // used to store when player was last hit
     private float lastHit;
+    public Transform textbox;
+    // on death explosion
     public Transform explosion;
-    private Rigidbody rb;
-  
+    // bullet prefab (set in the scene)
+    public Rigidbody2D projectile;
+    // walking speed
+    public float walkingSpeed;
+
     void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -26,12 +34,11 @@ public class PlayerController : MonoBehaviour {
         lastHit = Time.time;
         textScript = textbox.GetComponent<TextStuff>();
         textScript.SetHealthText(health);
-
-
     }
 
     void Update()
     {
+        // minimum time between shots in seconds
         double firingTime = 0.3;        
         float shootHorizontal = Input.GetAxis("Fire1");
         float shootVertical = Input.GetAxis("Fire2");
@@ -61,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
-        rb2d.velocity = movement*speed;
+        rb2d.velocity = movement*walkingSpeed;
         // direction: 0->idle, 1->down, 2->right, 3->up, 4->left
         int direction;
         int previousDirection = animator.GetInteger("Direction");
@@ -86,6 +93,8 @@ public class PlayerController : MonoBehaviour {
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;
+        // previous direction is used by animator so animations don't restart if
+        // preivousdirection == current direction (may rework this with a better solution)
         animator.SetInteger("PreviousDirection", previousDirection);
         animator.SetInteger("Direction",direction);        
 	}
@@ -94,16 +103,22 @@ public class PlayerController : MonoBehaviour {
 	{		
 		if (other.gameObject.CompareTag ("Enemy")) 
 		{
+            // seconds between hits
             int invincibleTime = 3;
             if (Time.time > (lastHit+ invincibleTime))
             {
                 health -= 1;
+                // set the UI health text
                 textScript.SetHealthText(health);
+                // death condition
                 if (health <= 0)
                 {
+                    //turn off this sprite & animator
                     this.spriteRenderer.enabled = false;
                     this.animator.enabled = false;
-                    Instantiate(explosion, transform.position, transform.rotation);                    
+                    // explosion animation
+                    Instantiate(explosion, transform.position, transform.rotation);
+                    // destroy all other objects in game (don't think this is currently working)
                     Object[] allObjects = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
                     foreach(Object item in allObjects){
                         Destroy(item);
